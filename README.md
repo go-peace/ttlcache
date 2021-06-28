@@ -1,5 +1,6 @@
 # ttlcache
 [![Go Report Card](https://goreportcard.com/badge/github.com/go-peace/ttlcache)](https://goreportcard.com/report/github.com/go-peace/ttlcache)
+[![Go Reference](https://pkg.go.dev/badge/github.com/go-peace/ttlcache.svg)](https://pkg.go.dev/github.com/go-peace/ttlcache)
 [![Go](https://github.com/go-peace/ttlcache/actions/workflows/go.yml/badge.svg)](https://github.com/go-peace/ttlcache/actions/workflows/go.yml)
 [![golangci-lint](https://github.com/go-peace/ttlcache/actions/workflows/golangci-lint.yml/badge.svg)](https://github.com/go-peace/ttlcache/actions/workflows/golangci-lint.yml)
 
