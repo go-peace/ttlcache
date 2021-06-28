@@ -62,6 +62,22 @@ func TestCleanupLatency(t *testing.T) {
 	})
 }
 
+func TestCacheLen(t *testing.T) {
+	cache := NewCache(time.Second)
+	cache.Set("foo", "bar")
+	if cache.Len() != 1 {
+		t.Error("len should be 1")
+	}
+	time.Sleep(1100 * time.Millisecond)
+	_, ok := cache.Get("foo")
+	if ok {
+		t.Error("key should be expired")
+	}
+	if cache.Len() != 0 {
+		t.Error("len should be 0")
+	}
+}
+
 func BenchmarkCache(b *testing.B) {
 	kvs := genKV(100000)
 	cache := NewCache(time.Hour)

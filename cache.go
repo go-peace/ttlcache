@@ -48,40 +48,36 @@ func (cache *mCache) Set(key string, value string) {
 // Get from cache, returns value and a bool indicating whether key is found.
 // Get will extend expire time if key exists
 func (cache *mCache) Get(key string) (string, bool) {
-	cache.Lock()
+	cache.RLock()
 	item, exists := cache.items[key]
+	cache.RUnlock()
 	if !exists || item.expired() {
 		return "", false
 	}
 	item.touch(cache.ttl)
-	cache.Unlock()
 	return item.data, true
 }
 
 // Len returns size of cached keys
 func (cache *mCache) Len() int {
-	cache.Lock()
-	defer cache.Unlock()
+	cache.RLock()
+	defer cache.RUnlock()
 	return len(cache.items)
 }
 
 // Cleanup delete all expired keys from cache
 func (cache *mCache) Cleanup() {
-	cache.Lock()
-	defer cache.Unlock()
 	for key, item := range cache.items {
 		if item.expired() {
+			cache.Lock()
 			delete(cache.items, key)
+			cache.Unlock()
 		}
 	}
 }
 
 func (cache *mCache) startCleanupTimer() {
-	duration := cache.ttl
-	if duration < time.Second {
-		duration = time.Second
-	}
-	ticker := time.NewTicker(duration)
+	ticker := time.NewTicker(cache.ttl)
 	go func() {
 		for range ticker.C {
 			cache.Cleanup()
