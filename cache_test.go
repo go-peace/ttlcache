@@ -13,6 +13,7 @@ func TestCleanupLatency(t *testing.T) {
 		for _, kv := range genKV(100) {
 			cache.Set(kv[0], kv[1])
 		}
+		time.Sleep(1100 * time.Millisecond)
 		now := time.Now()
 		cache.Cleanup()
 		fmt.Printf("delete 100kv\tlatency: %v\n", time.Since(now))
@@ -25,6 +26,7 @@ func TestCleanupLatency(t *testing.T) {
 		for _, kv := range genKV(1000) {
 			cache.Set(kv[0], kv[1])
 		}
+		time.Sleep(1100 * time.Millisecond)
 		now := time.Now()
 		cache.Cleanup()
 		fmt.Printf("delete 1000kv\tlatency: %v\n", time.Since(now))
@@ -37,6 +39,7 @@ func TestCleanupLatency(t *testing.T) {
 		for _, kv := range genKV(10000) {
 			cache.Set(kv[0], kv[1])
 		}
+		time.Sleep(1100 * time.Millisecond)
 		now := time.Now()
 		cache.Cleanup()
 		fmt.Printf("delete 10000kv\tlatency: %v\n", time.Since(now))
@@ -49,6 +52,7 @@ func TestCleanupLatency(t *testing.T) {
 		for _, kv := range genKV(100000) {
 			cache.Set(kv[0], kv[1])
 		}
+		time.Sleep(1100 * time.Millisecond)
 		now := time.Now()
 		cache.Cleanup()
 		fmt.Printf("delete 100000kv\tlatency: %v\n", time.Since(now))
