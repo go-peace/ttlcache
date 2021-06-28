@@ -7,11 +7,40 @@ a thread-safe and fast cache to store string with expire ttl
 
 ---
 
-## Install
-
 ## Usage
 ```go
+package main
+
+import (
+	"fmt"
+	"time"
+
+	"github.com/go-peace/ttlcache"
+)
+
+func main() {
+	// new a cache with ttl 1 second
+	cache := ttlcache.NewCache(time.Second)
+
+	// set value
+	cache.Set("foo", "bar")
+
+	// get value
+	v, exist := cache.Get("foo")
+	fmt.Printf("exist:%v\tvalue:%v\tcache size:%d\n", exist, v, cache.Len())
+
+	// get value after expiration
+	time.Sleep(2 * time.Second)
+	v, exist = cache.Get("foo")
+	fmt.Printf("exist:%v\tvalue:   %v\tcache size:%d\n", exist, v, cache.Len())
+}
 ```
+stdout:
+```bash
+exist:true	value:bar	cache size:1
+exist:false	value:   	cache size:0
+```
+
 
 
 ## Benchmark
