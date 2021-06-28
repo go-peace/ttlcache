@@ -1,5 +1,8 @@
 # ttlcache
+[![Go](https://github.com/go-peace/ttlcache/actions/workflows/go.yml/badge.svg)](https://github.com/go-peace/ttlcache/actions/workflows/go.yml)
+
 a thread-safe and fast cache to store string with expire ttl
+
 
 ## Benchmark
 ```bash
