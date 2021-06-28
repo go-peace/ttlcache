@@ -14,9 +14,9 @@ func TestCleanupLatency(t *testing.T) {
 			cache.Set(kv[0], kv[1])
 		}
 		now := time.Now()
-		cache.cleanup()
+		cache.Cleanup()
 		fmt.Printf("delete 100kv\tlatency: %v\n", time.Since(now))
-		if len(cache.items) != 0 {
+		if cache.Len() != 0 {
 			t.Error("cache should be cleanup")
 		}
 	})
@@ -26,9 +26,9 @@ func TestCleanupLatency(t *testing.T) {
 			cache.Set(kv[0], kv[1])
 		}
 		now := time.Now()
-		cache.cleanup()
+		cache.Cleanup()
 		fmt.Printf("delete 1000kv\tlatency: %v\n", time.Since(now))
-		if len(cache.items) != 0 {
+		if cache.Len() != 0 {
 			t.Error("cache should be cleanup")
 		}
 	})
@@ -38,9 +38,9 @@ func TestCleanupLatency(t *testing.T) {
 			cache.Set(kv[0], kv[1])
 		}
 		now := time.Now()
-		cache.cleanup()
+		cache.Cleanup()
 		fmt.Printf("delete 10000kv\tlatency: %v\n", time.Since(now))
-		if len(cache.items) != 0 {
+		if cache.Len() != 0 {
 			t.Error("cache should be cleanup")
 		}
 	})
@@ -50,9 +50,9 @@ func TestCleanupLatency(t *testing.T) {
 			cache.Set(kv[0], kv[1])
 		}
 		now := time.Now()
-		cache.cleanup()
+		cache.Cleanup()
 		fmt.Printf("delete 100000kv\tlatency: %v\n", time.Since(now))
-		if len(cache.items) != 0 {
+		if cache.Len() != 0 {
 			t.Error("cache should be cleanup")
 		}
 	})
@@ -67,7 +67,7 @@ func BenchmarkCache(b *testing.B) {
 	for i := 0; i < n; i++ {
 		cache.Set(kvs[i][0], kvs[i][1])
 	}
-	if len(cache.items) != n {
+	if cache.Len() != n {
 		b.FailNow()
 	}
 	b.Run("1000kv Set", func(b *testing.B) {
@@ -87,7 +87,7 @@ func BenchmarkCache(b *testing.B) {
 	for i := 0; i < n; i++ {
 		cache.Set(kvs[i][0], kvs[i][1])
 	}
-	if len(cache.items) != n {
+	if cache.Len() != n {
 		b.FailNow()
 	}
 	b.Run("10000kv Set", func(b *testing.B) {
@@ -107,7 +107,7 @@ func BenchmarkCache(b *testing.B) {
 	for i := 0; i < n; i++ {
 		cache.Set(kvs[i][0], kvs[i][1])
 	}
-	if len(cache.items) != n {
+	if cache.Len() != n {
 		b.FailNow()
 	}
 	b.Run("100000kv Set", func(b *testing.B) {

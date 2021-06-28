@@ -5,20 +5,20 @@ import (
 	"time"
 )
 
-type Item struct {
+type item struct {
 	sync.RWMutex
 	data    string
 	expires *time.Time
 }
 
-func (item *Item) touch(duration time.Duration) {
+func (item *item) touch(duration time.Duration) {
 	item.Lock()
-	defer item.Unlock()
 	expiration := time.Now().Add(duration)
 	item.expires = &expiration
+	item.Unlock()
 }
 
-func (item *Item) expired() bool {
+func (item *item) expired() bool {
 	item.RLock()
 	defer item.RUnlock()
 	return item.expires == nil || item.expires.Before(time.Now())
