@@ -44,15 +44,12 @@ func (cache *Cache) startCleanupTimer() {
 	if duration < time.Second {
 		duration = time.Second
 	}
-	ticker := time.Tick(duration)
-	go (func() {
-		for {
-			select {
-			case <-ticker:
-				cache.cleanup()
-			}
+	ticker := time.NewTicker(duration)
+	go func() {
+		for range ticker.C {
+			cache.cleanup()
 		}
-	})()
+	}()
 }
 
 func (cache *Cache) cleanup() {

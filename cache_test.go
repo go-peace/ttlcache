@@ -140,13 +140,3 @@ func randStr(n int) string {
 	}
 	return string(b)
 }
-
-// do fn n times with concurrency
-func doConcurrent(fn func(i int), n, concurrency int) {
-	guard := make(chan struct{}, concurrency)
-	for i := 0; i < n; i++ {
-		guard <- struct{}{}
-		go fn(i)
-		<-guard
-	}
-}
