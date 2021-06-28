@@ -1,5 +1,6 @@
 # ttlcache
 [![Go](https://github.com/go-peace/ttlcache/actions/workflows/go.yml/badge.svg)](https://github.com/go-peace/ttlcache/actions/workflows/go.yml)
+[![golangci-lint](https://github.com/go-peace/ttlcache/actions/workflows/golangci-lint.yml/badge.svg)](https://github.com/go-peace/ttlcache/actions/workflows/golangci-lint.yml)
 
 a thread-safe and fast cache to store string with expire ttl
 
